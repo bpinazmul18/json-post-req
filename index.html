@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div>
+    <h1>Post</h1>
+    <form id="form" method="post">
+        <p><input type="number" id="id" placeholder="Enter your id..."></p>
+        <p><input type="text" id="name" placeholder="Enter your name..."></p>
+        <p><input type="email" id="email" placeholder="Enter your email name..."></p>
+        <p><textarea name="message" id="message" cols="30" rows="10"></textarea></p>
+        <input type="submit" value="Submit">
+        <div id="results"></div>
+    </form>
+</div>
+<script src="main.js"></script>
+
+<script>
+    var form = document.getElementById('form')
+    form.addEventListener('submit', e => {
+        e.preventDefault()
+        var name = document.getElementById('name').value
+        var email = document.getElementById('email').value
+        var message = document.getElementById('message').value
+        var id = document.getElementById('id').value
+
+        //fetch post request
+
+        fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
+            body:JSON.stringify({
+               name: name,
+                email: email,
+               message: message,
+               id: id
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        .then(res => {
+            return res.json()
+        })
+        .then(data => {
+            console.log(data)
+            var results = document.getElementById('results')
+            results.innerHTML = `<p>Id Number is: ${data.id}</p> <p>Name is: ${data.name}</p> <p>Email: ${data.email} </p> <p>Message: ${data.message} </p> `
+        })
+    })
+</script>
+</body>
+</html>

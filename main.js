@@ -11,11 +11,13 @@ function get() {
             for(var i in obj) {
                 $("#result").append(`
                             <div class="card mt-4">
-                                <a class="card-header" href="https://jsonplaceholder.typicode.com/posts/${obj[i].id} " target="_blank">
-                                    <div class="card-title"> ${obj[i].title}</div>
-                                </a>
+                                <div class="card-header"> ${obj[i].title}</div>
                                 <div class="card-body">
                                     ${obj[i].body}
+                                </div>
+                                <div class="footer p-4">
+                                    <a href="https://jsonplaceholder.typicode.com/posts/${obj[i].id} " target="_blank">
+                                    Read More </a>
                                 </div>
                             </div>`);
 
